@@ -1,0 +1,26 @@
+import cookieParser from "cookie-parser";
+import express from "express";
+import dotenv from "dotenv";
+
+import authRouters from "./routes/auth.routes.js";
+
+dotenv.config();
+
+const app = express();
+
+app.use(cookieParser());
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello from localhost");
+});
+
+app.use("/api/v1/auth", authRouters);
+
+const port = process.env.PORT || 8000;
+
+console.log(process.env.PORT, "IFEIEE");
+
+app.listen(port, () => {
+  console.log("Listening to port ", port);
+});
