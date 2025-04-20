@@ -1,16 +1,15 @@
 import jwt from "jsonwebtoken";
 import {db} from "../libs/db.js";
 
-export const authMiddleware = async (req, res) => {
+export const authMiddleware = async (req, res, next) => {
   try {
-    const {token} = req.cookies.jwt;
+    const token = req.cookies.jwt;
 
     if (!token) {
       return res.status(401).json({
         message: "Unauthorized - No token provided",
       });
     }
-    console.log(token, "FEEFEF")
 
     let decoded;
 
@@ -23,7 +22,7 @@ export const authMiddleware = async (req, res) => {
       });
     }
 
-    const user = await db.user.findUpdate({
+    const user = await db.user.findUnique({
       where: {
         id: decoded.id,
       },
