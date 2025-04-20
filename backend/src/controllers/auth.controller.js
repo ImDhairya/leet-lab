@@ -3,29 +3,28 @@ import jwt from "jsonwebtoken";
 import {UserRole} from "../generated/prisma/index.js";
 import {db} from "../libs/db.js";
 import cookieParser from "cookie-parser";
+import {asyncHandler} from "../utils/async-handler.js";
+import {ApiResponse} from "../utils/api-response.js";
+import {ApiErrors} from "../utils/api-errors.js";
 
-export const register = async (req, res) => {
+export const register = asyncHandler(async (req, res) => {
   const {email, password, name} = req.body;
   if (!email || !password || !name) {
-    return res.status(404).json({
-      message: "Please give all user details",
-      success: false,
-    });
+    throw new ApiErrors(404, "Please give all user details");
   }
+
   try {
     const existingUser = await db.user.findUnique({
       where: {
         email,
       },
     });
+
     if (existingUser) {
-      return res.status(400).json({
-        message: "user already exists, please login",
-      });
+      throw new ApiErrors(400, "User already exist.");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    // send registration email
 
     const newUser = await db.user.create({
       data: {
@@ -47,33 +46,32 @@ export const register = async (req, res) => {
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 
-    res.status(201).json({
-      success: true,
-      message: "User created successfully",
-      user: {
-        id: newUser.id,
-        email: newUser.email,
-        name: newUser.name,
-        role: newUser.role,
-        image: newUser.image,
-      },
-    });
+    res.status(201).json(
+      new ApiResponse(
+        201,
+        {
+          id: newUser.id,
+          email: newUser.email,
+          role: newUser.role,
+          name: newUser.name,
+          image: newUser.image,
+        },
+        "User created successfully"
+      )
+    );
   } catch (error) {
-    console.error("Error creating user:", error);
-    res.status(500).json({
-      error: "Error creating user",
-    });
+    console.log(error, "ERROR REGISTRATION");
+    throw new ApiErrors(500, "Error creating user.");
   }
-};
-export const login = async (req, res) => {
+});
+
+export const login = asyncHandler(async (req, res) => {
   const {email, password} = req.body;
 
   if (!email || !password) {
-    return res.status(404).json({
-      message: "Please give all user details",
-      success: false,
-    });
+    throw new ApiErrors(404, "Provide give all user details.");
   }
+
   try {
     const existingUser = await db.user.findUnique({
       where: {
@@ -82,16 +80,13 @@ export const login = async (req, res) => {
     });
 
     if (!existingUser) {
-      return res.status(401).json({
-        error: "User not found.",
-      });
+      throw new ApiErrors(401, "User not found");
     }
+
     const isMatch = bcrypt.compare(password, existingUser.password);
 
     if (!isMatch) {
-      return res.status(401).json({
-        error: "invalid credentials",
-      });
+      throw new ApiErrors(401, "Invalid credentials.");
     }
 
     const token = jwt.sign({id: existingUser.id}, process.env.JWT_SECRET);
@@ -103,26 +98,21 @@ export const login = async (req, res) => {
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
     });
 
-    res.status(200).json({
-      success: true,
-      message: "User Logged in successfully",
-      existingUser: {
+    return res.status(200).json(
+      new ApiResponse(200, {
         id: existingUser.id,
-        email: existingUser.email,
         name: existingUser.name,
         role: existingUser.role,
         image: existingUser.image,
-      },
-    });
+        email: existingUser.email,
+      })
+    );
   } catch (error) {
-    console.error("Error creating user:", error);
-    res.status(500).json({
-      error: "Error logging in user",
-    });
+    throw new ApiErrors(500, "Error logging in user");
   }
-};
+});
 
-export const logout = async (req, res) => {
+export const logout = asyncHandler(async (req, res) => {
   try {
     res.clearCookie("jwt", {
       httpOnly: true,
@@ -130,29 +120,27 @@ export const logout = async (req, res) => {
       secure: process.env.NODE_ENV !== "development",
     });
 
-    res.status(200).json({
-      success: true,
-      message: "User logged out successfully",
-    });
+    return res
+      .status(200)
+      .json(new ApiResponse(200, {}, "User logged out successfully "));
   } catch (error) {
     console.error("Error logging out user:", error);
-    res.status(500).json({
-      error: "Error logging out user",
-    });
+    throw new ApiErrors(500, "Error logging out of user");
   }
-};
-
-export const check = async (req, res) => {
+});
+export const check = asyncHandler(async (req, res) => {
   try {
-    res.status(200).json({
-      success: true,
-      message: "User authenticated Successfully",
-      user: req.user,
-    });
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          {user: req.user},
+          "User authenticated successfully."
+        )
+      );
   } catch (error) {
-    console.error("Error checking user", error);
-    res.status(500).json({
-      error: "Error checking user.",
-    });
+    console.log(error, "Myerror");
+    throw new ApiErrors(500, "Error creating user");
   }
-};
+});
