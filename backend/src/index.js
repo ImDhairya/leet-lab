@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 
 import authRouters from "./routes/auth.routes.js";
+import problemRoutes from "./routes/problem.routes.js";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRouters);
+app.use('/api/v1/problems', problemRoutes)
 
 const port = process.env.PORT || 8000;
 
