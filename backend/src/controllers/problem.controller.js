@@ -1,5 +1,9 @@
 import {db} from "../libs/db.js";
-import {getJudge0LanguageId, pollBatchResults, submitBatch} from "../libs/judge0.lib.js";
+import {
+  getJudge0LanguageId,
+  pollBatchResults,
+  submitBatch,
+} from "../libs/judge0.lib.js";
 
 export const createProblem = async (req, res) => {
   // get all data from request body
@@ -31,6 +35,7 @@ export const createProblem = async (req, res) => {
         return res.status(400).json({error: "Invalid language"});
       }
       // here we are mapping the testcases for example there are 3 test cases, each test case will have an input and an output and we are creating a submission for each test case.
+      console.log(testcases, "MYefe");
       const submissions = testcases.map(({input, output}) => ({
         source_code: solutionCode,
         language_id: languageId,
@@ -51,7 +56,8 @@ export const createProblem = async (req, res) => {
       // we will wait and keep polling until the submission is done, either solved or failed.
       // once we are given the result and check if the result is of statusid other than 3, if that is the case we will return an error. indicating that the test case failed.
 
-      const results = await pollBatchResults.map(tokens);
+      const results = await pollBatchResults(tokens);
+      console.log(results, "IR");
 
       for (let i = 0; i < results.length; i++) {
         const result = results[i];

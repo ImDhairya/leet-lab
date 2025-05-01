@@ -4,7 +4,7 @@ export const getJudge0LanguageId = (language) => {
   console.log(language, "mylang");
   const languageMap = {
     PYTHON: 71,
-    JAVASCRIPT: 63,
+    JAVASCRIPT: 93,
     JAVA: 62,
   };
 
@@ -21,8 +21,10 @@ export const pollBatchResults = async (tokens) => {
     const {data} = await axios.get(
       `${process.env.JUDGE0_API_URL}/submissions/batch`,
       {
-        tokens: tokens.join(","),
-        base64_encoded: false,
+        params: {
+          tokens: tokens.join(","),
+          base64_encoded: false,
+        },
       }
     );
 
