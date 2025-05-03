@@ -4,7 +4,7 @@ export const getJudge0LanguageId = (language) => {
   console.log(language, "mylang");
   const languageMap = {
     PYTHON: 71,
-    JAVASCRIPT: 93,
+    JAVASCRIPT: 63,
     JAVA: 62,
   };
 
