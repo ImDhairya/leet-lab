@@ -28,6 +28,7 @@ export const getSubmissionsForProblem = async (req, res) => {
   try {
     const userId = req.user.id;
     const problemId = req.params.problemId;
+    console.log(problemId, userId, "MIRESEE");
 
     const submissions = await db.submission.findMany({
       where: {

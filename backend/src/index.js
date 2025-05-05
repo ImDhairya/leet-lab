@@ -6,6 +6,7 @@ import authRouters from "./routes/auth.routes.js";
 import problemRoutes from "./routes/problem.routes.js";
 import executionRoute from "./routes/executeCode.routes.js";
 import submissionRoutes from "./routes/submission.routes.js";
+import playlistRoutes from "./routes/playlistRoutes.js";
 
 dotenv.config();
 
@@ -21,7 +22,9 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authRouters);
 app.use("/api/v1/problems", problemRoutes);
 app.use("/api/v1/execute-code", executionRoute);
-app.use('/api/v1/submission', submissionRoutes)
+app.use("/api/v1/submission", submissionRoutes);
+
+app.use("/api/v1/playlist", playlistRoutes);
 
 const port = process.env.PORT || 8000;
 
