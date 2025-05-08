@@ -77,7 +77,7 @@ export const executeCode = async (req, res) => {
       data: {
         userId,
         problemId,
-        sourceCode: source_code,
+        sourceCode: {source_code},
         language: getLanguageName(language_id),
         stdin: stdin.join("\n"),
         stdout: JSON.stringify(detailedResults.map((r) => r.stdout)),
