@@ -23,7 +23,6 @@ export const useAuthStore = create((set) => ({
 
   signup: async (data) => {
     set({isSigninUp: true});
-    set({isSigninUp: true});
     try {
       const res = await axisoInstance.post("/auth/register", data);
 
