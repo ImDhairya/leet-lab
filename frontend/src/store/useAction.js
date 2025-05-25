@@ -1,6 +1,6 @@
 import {create} from "zustand";
 
-import {axiosInstance} from "../lib/axios.js";
+import {axisoInstance} from "../lib/axios.js";
 import toast from "react-hot-toast";
 
 export const useActions = create((set) => ({
@@ -8,7 +8,7 @@ export const useActions = create((set) => ({
   onDeleteProblem: async (id) => {
     try {
       set({isDeletingProblem: true});
-      const res = await axiosInstance.delete(`/problems/delete-problem/${id}`);
+      const res = await axisoInstance.delete(`/problems/delete-problem/${id}`);
       toast.success(res.data.message);
     } catch (error) {
       console.error("Error deleting problem:", error);

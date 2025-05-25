@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import axiosInstance from "../lib/axios.js";
+import {axisoInstance} from "../lib/axios.js";
 
 import toast from "react-hot-toast";
 import {get, set} from "react-hook-form";
@@ -13,7 +13,7 @@ export const usePlaylistStore = create((set, get) => ({
   createPlaylist: async (playlistData) => {
     try {
       set({isLoading: true});
-      const response = await axiosInstance.post(
+      const response = await axisoInstance.post(
         "/playlist/create-playlist",
         playlistData
       );
@@ -36,8 +36,8 @@ export const usePlaylistStore = create((set, get) => ({
   getAllPlaylists: async () => {
     try {
       set({isLoading: true});
-      const response = await axiosInstance.get("/playlist");
-      set({playlists: response.data.playLists});
+      const response = await axisoInstance.get("/playlist");
+      set({playlists: response.data.playlists});
     } catch (error) {
       console.error("Error fetching playlists:", error);
       toast.error("Failed to fetch playlists");
@@ -49,7 +49,7 @@ export const usePlaylistStore = create((set, get) => ({
   getPlaylistDetails: async (playlistId) => {
     try {
       set({isLoading: true});
-      const response = await axiosInstance.get(`/playlist/${playlistId}`);
+      const response = await axisoInstance.get(`/playlist/${playlistId}`);
       set({currentPlaylist: response.data.playList});
     } catch (error) {
       console.error("Error fetching playlist details:", error);
@@ -62,7 +62,7 @@ export const usePlaylistStore = create((set, get) => ({
   addProblemToPlaylist: async (playlistId, problemIds) => {
     try {
       set({isLoading: true});
-      const response = await axiosInstance.post(
+      const response = await axisoInstance.post(
         `/playlist/${playlistId}/add-problem`,
         {problemIds}
       );
@@ -83,7 +83,7 @@ export const usePlaylistStore = create((set, get) => ({
   removeProblemFromPlaylist: async (playlistId, problemIds) => {
     try {
       set({isLoading: true});
-      await axiosInstance.post(`/playlist/${playlistId}/remove-problems`, {
+      await axisoInstance.post(`/playlist/${playlistId}/remove-problems`, {
         problemIds,
       });
 
@@ -104,7 +104,7 @@ export const usePlaylistStore = create((set, get) => ({
   deletePlaylist: async (playlistId) => {
     try {
       set({isLoading: true});
-      await axiosInstance.delete(`/playlist/${playlistId}`);
+      await axisoInstance.delete(`/playlist/${playlistId}`);
       toast.success("Playlist deleted successfully");
       set((state) => ({
         playlists: state.playlists.filter((p) => p.id !== playlistId),

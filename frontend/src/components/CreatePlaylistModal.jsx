@@ -1,8 +1,9 @@
 import React from "react";
 import {useForm} from "react-hook-form";
-import {x} from "lucide-react ";
+// import {x} from "lucide-react ";
+import { X } from "lucide-react";
 
-const CreatePlayliistModal = ({isOpen, onClose, onSubmit}) => {
+const CreatePlaylistModal = ({isOpen, onClose, onSubmit}) => {
   const {
     register,
     handleSubmit,
@@ -85,4 +86,4 @@ const CreatePlayliistModal = ({isOpen, onClose, onSubmit}) => {
   );
 };
 
-export default CreatePlayliistModal;
+export default CreatePlaylistModal;

@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import {axiosInstance} from "../lib/axios";
+import {axisoInstance} from "../lib/axios";
 import toast from "react-hot-toast";
 
 export const useExecutionStore = create((set) => ({
@@ -15,7 +15,7 @@ export const useExecutionStore = create((set) => ({
   ) => {
     try {
       set({isExecuting: true});
-      const response = await axiosInstance.post("/execute-code", {
+      const response = await axisoInstance.post("/execute-code", {
         source_code,
         language_id,
         stdin,
