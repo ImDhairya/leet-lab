@@ -3,6 +3,7 @@ import {User, Code, LogOut} from "lucide-react";
 import {useAuthStore} from "../store/useAuthStore";
 import {Link} from "react-router-dom";
 import LogoutButton from "./LogoutButton";
+import Logo from "../../public/Logo.svg";
 
 const Navbar = () => {
   const {authUser} = useAuthStore();
@@ -15,10 +16,9 @@ const Navbar = () => {
           to="/"
           className="flex items-center gap-3 cursor-pointer"
         >
-          <img
-            src="/leetlab.svg"
-            className="h-18 w-18 bg-primary/20 text-primary border-none px-2 py-2 rounded-full"
-          />
+          {/* <img
+            src={`https://ui-avatars.com/api/?name=${"Leet Lab"}&background=blue&rounded=false`}
+          /> */}
           <span className="text-lg md:text-2xl font-bold tracking-tight text-white hidden md:block">
             Leetlab
           </span>
@@ -32,13 +32,18 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar flex flex-row "
             >
               <div className="w-10 rounded-full ">
-                <img
+                {/* <img
                   src={
                     authUser?.image ||
                     "https://avatar.iran.liara.run/public/boy"
                   }
                   alt="User Avatar"
                   className="object-cover"
+                /> */}
+                <img
+                  src={`https://ui-avatars.com/api/?name=${
+                    authUser && authUser.name
+                  }&background=random&rounded=true`}
                 />
               </div>
             </label>
