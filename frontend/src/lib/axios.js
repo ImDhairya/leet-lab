@@ -7,3 +7,8 @@ export const axisoInstance = axios.create({
       : "/api/v1",
   withCredentials: true,
 });
+
+
+export const googleAxiosInstance = axios.create({
+  baseURL: 'https://google?code'
+})

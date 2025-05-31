@@ -41,6 +41,21 @@ model User {
   playlists     Playlist[]
 }
 
+model GoogleUser {
+  id        String   @id @default(uuid())
+  name      String?
+  email     String   @unique
+  image     String?
+  role      UserRole @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // problems      Problem[]
+  // submission    Submission[]
+  // problemSolved ProblemSolved[]
+  // playlists     Playlist[]
+}
+
 model Problem {
   id          String     @id @default(uuid())
   title       String

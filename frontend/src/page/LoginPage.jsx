@@ -1,13 +1,16 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {useGoogleLogin} from "@react-oauth/google";
+// import {googleAxiosInstance} from "../lib/axios.js";
 import {Code, Eye, EyeOff, Loader2, Lock, Mail} from "lucide-react";
 
 import {z} from "zod";
 
 import AuthImagePattern from "../components/AuthImagePattern";
 import {useAuthStore} from "../store/useAuthStore";
+import axios from "axios";
 
 const LoginSchema = z.object({
   email: z.string().email("Enter a valid email"),
@@ -18,6 +21,25 @@ const LoginPage = () => {
   const {isLoggingIn, login} = useAuthStore();
 
   const [showPassword, setShowPassword] = useState(false);
+
+  const responseGoogle = async (authResult) => {
+    try {
+      console.log(authResult.code);
+      const response = await axios.get(
+        `http://localhost:3000/api/v1/auth/google?code=${authResult.code}`
+      );
+      const googleUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${authResult.code}&redirect_uri=http://localhost:5173/login&response_type=code&scope=email%20profile&access_type=offline`;
+
+      console.log(response, "THeode");
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+  const googleLogin = useGoogleLogin({
+    onSuccess: responseGoogle,
+    onError: responseGoogle,
+    flow: "auth-code",
+  });
 
   const {
     register,
@@ -32,6 +54,15 @@ const LoginPage = () => {
       await login(data);
     } catch (error) {
       console.error("Login failed", error);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await googleLogin();
+      // googleLogin();
+    } catch (error) {
+      console.error("Error", error);
     }
   };
 
@@ -133,6 +164,20 @@ const LoginPage = () => {
             </button>
           </form>
 
+          <button
+            onClick={() => handleGoogleLogin()}
+            className="btn btn-primary w-full"
+            // disabled={isLoggingIn}
+          >
+            {isLoggingIn ? (
+              <>
+                <Loader2 className="h-5 w-5 animate-spin" />
+                Loading...
+              </>
+            ) : (
+              "Sign in with Google"
+            )}
+          </button>
           {/* Footer */}
           <div className="text-center">
             <p className="text-base-content/60">

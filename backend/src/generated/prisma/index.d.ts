@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model GoogleUser
+ * 
+ */
+export type GoogleUser = $Result.DefaultSelection<Prisma.$GoogleUserPayload>
+/**
  * Model Problem
  * 
  */
@@ -213,6 +218,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.googleUser`: Exposes CRUD operations for the **GoogleUser** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GoogleUsers
+    * const googleUsers = await prisma.googleUser.findMany()
+    * ```
+    */
+  get googleUser(): Prisma.GoogleUserDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.problem`: Exposes CRUD operations for the **Problem** model.
@@ -714,6 +729,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    GoogleUser: 'GoogleUser',
     Problem: 'Problem',
     Submission: 'Submission',
     TestCaseResult: 'TestCaseResult',
@@ -738,7 +754,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "problem" | "submission" | "testCaseResult" | "problemSolved" | "playlist" | "problemInPlaylist"
+      modelProps: "user" | "googleUser" | "problem" | "submission" | "testCaseResult" | "problemSolved" | "playlist" | "problemInPlaylist"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -813,6 +829,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      GoogleUser: {
+        payload: Prisma.$GoogleUserPayload<ExtArgs>
+        fields: Prisma.GoogleUserFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GoogleUserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleUserPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GoogleUserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleUserPayload>
+          }
+          findFirst: {
+            args: Prisma.GoogleUserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleUserPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GoogleUserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleUserPayload>
+          }
+          findMany: {
+            args: Prisma.GoogleUserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleUserPayload>[]
+          }
+          create: {
+            args: Prisma.GoogleUserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleUserPayload>
+          }
+          createMany: {
+            args: Prisma.GoogleUserCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GoogleUserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleUserPayload>[]
+          }
+          delete: {
+            args: Prisma.GoogleUserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleUserPayload>
+          }
+          update: {
+            args: Prisma.GoogleUserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleUserPayload>
+          }
+          deleteMany: {
+            args: Prisma.GoogleUserDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GoogleUserUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GoogleUserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleUserPayload>[]
+          }
+          upsert: {
+            args: Prisma.GoogleUserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoogleUserPayload>
+          }
+          aggregate: {
+            args: Prisma.GoogleUserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGoogleUser>
+          }
+          groupBy: {
+            args: Prisma.GoogleUserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GoogleUserGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GoogleUserCountArgs<ExtArgs>
+            result: $Utils.Optional<GoogleUserCountAggregateOutputType> | number
           }
         }
       }
@@ -1345,6 +1435,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    googleUser?: GoogleUserOmit
     problem?: ProblemOmit
     submission?: SubmissionOmit
     testCaseResult?: TestCaseResultOmit
@@ -2803,6 +2894,1027 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model GoogleUser
+   */
+
+  export type AggregateGoogleUser = {
+    _count: GoogleUserCountAggregateOutputType | null
+    _min: GoogleUserMinAggregateOutputType | null
+    _max: GoogleUserMaxAggregateOutputType | null
+  }
+
+  export type GoogleUserMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    email: string | null
+    image: string | null
+    role: $Enums.UserRole | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GoogleUserMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    email: string | null
+    image: string | null
+    role: $Enums.UserRole | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GoogleUserCountAggregateOutputType = {
+    id: number
+    name: number
+    email: number
+    image: number
+    role: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GoogleUserMinAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    image?: true
+    role?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GoogleUserMaxAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    image?: true
+    role?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GoogleUserCountAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    image?: true
+    role?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GoogleUserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GoogleUser to aggregate.
+     */
+    where?: GoogleUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GoogleUsers to fetch.
+     */
+    orderBy?: GoogleUserOrderByWithRelationInput | GoogleUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GoogleUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GoogleUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GoogleUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GoogleUsers
+    **/
+    _count?: true | GoogleUserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GoogleUserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GoogleUserMaxAggregateInputType
+  }
+
+  export type GetGoogleUserAggregateType<T extends GoogleUserAggregateArgs> = {
+        [P in keyof T & keyof AggregateGoogleUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGoogleUser[P]>
+      : GetScalarType<T[P], AggregateGoogleUser[P]>
+  }
+
+
+
+
+  export type GoogleUserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GoogleUserWhereInput
+    orderBy?: GoogleUserOrderByWithAggregationInput | GoogleUserOrderByWithAggregationInput[]
+    by: GoogleUserScalarFieldEnum[] | GoogleUserScalarFieldEnum
+    having?: GoogleUserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GoogleUserCountAggregateInputType | true
+    _min?: GoogleUserMinAggregateInputType
+    _max?: GoogleUserMaxAggregateInputType
+  }
+
+  export type GoogleUserGroupByOutputType = {
+    id: string
+    name: string | null
+    email: string
+    image: string | null
+    role: $Enums.UserRole
+    createdAt: Date
+    updatedAt: Date
+    _count: GoogleUserCountAggregateOutputType | null
+    _min: GoogleUserMinAggregateOutputType | null
+    _max: GoogleUserMaxAggregateOutputType | null
+  }
+
+  type GetGoogleUserGroupByPayload<T extends GoogleUserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GoogleUserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GoogleUserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GoogleUserGroupByOutputType[P]>
+            : GetScalarType<T[P], GoogleUserGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GoogleUserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    image?: boolean
+    role?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["googleUser"]>
+
+  export type GoogleUserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    image?: boolean
+    role?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["googleUser"]>
+
+  export type GoogleUserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    image?: boolean
+    role?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["googleUser"]>
+
+  export type GoogleUserSelectScalar = {
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    image?: boolean
+    role?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GoogleUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "image" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["googleUser"]>
+
+  export type $GoogleUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GoogleUser"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string | null
+      email: string
+      image: string | null
+      role: $Enums.UserRole
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["googleUser"]>
+    composites: {}
+  }
+
+  type GoogleUserGetPayload<S extends boolean | null | undefined | GoogleUserDefaultArgs> = $Result.GetResult<Prisma.$GoogleUserPayload, S>
+
+  type GoogleUserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GoogleUserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GoogleUserCountAggregateInputType | true
+    }
+
+  export interface GoogleUserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GoogleUser'], meta: { name: 'GoogleUser' } }
+    /**
+     * Find zero or one GoogleUser that matches the filter.
+     * @param {GoogleUserFindUniqueArgs} args - Arguments to find a GoogleUser
+     * @example
+     * // Get one GoogleUser
+     * const googleUser = await prisma.googleUser.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GoogleUserFindUniqueArgs>(args: SelectSubset<T, GoogleUserFindUniqueArgs<ExtArgs>>): Prisma__GoogleUserClient<$Result.GetResult<Prisma.$GoogleUserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GoogleUser that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GoogleUserFindUniqueOrThrowArgs} args - Arguments to find a GoogleUser
+     * @example
+     * // Get one GoogleUser
+     * const googleUser = await prisma.googleUser.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GoogleUserFindUniqueOrThrowArgs>(args: SelectSubset<T, GoogleUserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GoogleUserClient<$Result.GetResult<Prisma.$GoogleUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GoogleUser that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleUserFindFirstArgs} args - Arguments to find a GoogleUser
+     * @example
+     * // Get one GoogleUser
+     * const googleUser = await prisma.googleUser.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GoogleUserFindFirstArgs>(args?: SelectSubset<T, GoogleUserFindFirstArgs<ExtArgs>>): Prisma__GoogleUserClient<$Result.GetResult<Prisma.$GoogleUserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GoogleUser that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleUserFindFirstOrThrowArgs} args - Arguments to find a GoogleUser
+     * @example
+     * // Get one GoogleUser
+     * const googleUser = await prisma.googleUser.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GoogleUserFindFirstOrThrowArgs>(args?: SelectSubset<T, GoogleUserFindFirstOrThrowArgs<ExtArgs>>): Prisma__GoogleUserClient<$Result.GetResult<Prisma.$GoogleUserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GoogleUsers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleUserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GoogleUsers
+     * const googleUsers = await prisma.googleUser.findMany()
+     * 
+     * // Get first 10 GoogleUsers
+     * const googleUsers = await prisma.googleUser.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const googleUserWithIdOnly = await prisma.googleUser.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GoogleUserFindManyArgs>(args?: SelectSubset<T, GoogleUserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoogleUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GoogleUser.
+     * @param {GoogleUserCreateArgs} args - Arguments to create a GoogleUser.
+     * @example
+     * // Create one GoogleUser
+     * const GoogleUser = await prisma.googleUser.create({
+     *   data: {
+     *     // ... data to create a GoogleUser
+     *   }
+     * })
+     * 
+     */
+    create<T extends GoogleUserCreateArgs>(args: SelectSubset<T, GoogleUserCreateArgs<ExtArgs>>): Prisma__GoogleUserClient<$Result.GetResult<Prisma.$GoogleUserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GoogleUsers.
+     * @param {GoogleUserCreateManyArgs} args - Arguments to create many GoogleUsers.
+     * @example
+     * // Create many GoogleUsers
+     * const googleUser = await prisma.googleUser.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GoogleUserCreateManyArgs>(args?: SelectSubset<T, GoogleUserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GoogleUsers and returns the data saved in the database.
+     * @param {GoogleUserCreateManyAndReturnArgs} args - Arguments to create many GoogleUsers.
+     * @example
+     * // Create many GoogleUsers
+     * const googleUser = await prisma.googleUser.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GoogleUsers and only return the `id`
+     * const googleUserWithIdOnly = await prisma.googleUser.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GoogleUserCreateManyAndReturnArgs>(args?: SelectSubset<T, GoogleUserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoogleUserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GoogleUser.
+     * @param {GoogleUserDeleteArgs} args - Arguments to delete one GoogleUser.
+     * @example
+     * // Delete one GoogleUser
+     * const GoogleUser = await prisma.googleUser.delete({
+     *   where: {
+     *     // ... filter to delete one GoogleUser
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GoogleUserDeleteArgs>(args: SelectSubset<T, GoogleUserDeleteArgs<ExtArgs>>): Prisma__GoogleUserClient<$Result.GetResult<Prisma.$GoogleUserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GoogleUser.
+     * @param {GoogleUserUpdateArgs} args - Arguments to update one GoogleUser.
+     * @example
+     * // Update one GoogleUser
+     * const googleUser = await prisma.googleUser.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GoogleUserUpdateArgs>(args: SelectSubset<T, GoogleUserUpdateArgs<ExtArgs>>): Prisma__GoogleUserClient<$Result.GetResult<Prisma.$GoogleUserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GoogleUsers.
+     * @param {GoogleUserDeleteManyArgs} args - Arguments to filter GoogleUsers to delete.
+     * @example
+     * // Delete a few GoogleUsers
+     * const { count } = await prisma.googleUser.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GoogleUserDeleteManyArgs>(args?: SelectSubset<T, GoogleUserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GoogleUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleUserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GoogleUsers
+     * const googleUser = await prisma.googleUser.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GoogleUserUpdateManyArgs>(args: SelectSubset<T, GoogleUserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GoogleUsers and returns the data updated in the database.
+     * @param {GoogleUserUpdateManyAndReturnArgs} args - Arguments to update many GoogleUsers.
+     * @example
+     * // Update many GoogleUsers
+     * const googleUser = await prisma.googleUser.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GoogleUsers and only return the `id`
+     * const googleUserWithIdOnly = await prisma.googleUser.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GoogleUserUpdateManyAndReturnArgs>(args: SelectSubset<T, GoogleUserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoogleUserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GoogleUser.
+     * @param {GoogleUserUpsertArgs} args - Arguments to update or create a GoogleUser.
+     * @example
+     * // Update or create a GoogleUser
+     * const googleUser = await prisma.googleUser.upsert({
+     *   create: {
+     *     // ... data to create a GoogleUser
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GoogleUser we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GoogleUserUpsertArgs>(args: SelectSubset<T, GoogleUserUpsertArgs<ExtArgs>>): Prisma__GoogleUserClient<$Result.GetResult<Prisma.$GoogleUserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GoogleUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleUserCountArgs} args - Arguments to filter GoogleUsers to count.
+     * @example
+     * // Count the number of GoogleUsers
+     * const count = await prisma.googleUser.count({
+     *   where: {
+     *     // ... the filter for the GoogleUsers we want to count
+     *   }
+     * })
+    **/
+    count<T extends GoogleUserCountArgs>(
+      args?: Subset<T, GoogleUserCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GoogleUserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GoogleUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleUserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GoogleUserAggregateArgs>(args: Subset<T, GoogleUserAggregateArgs>): Prisma.PrismaPromise<GetGoogleUserAggregateType<T>>
+
+    /**
+     * Group by GoogleUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoogleUserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GoogleUserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GoogleUserGroupByArgs['orderBy'] }
+        : { orderBy?: GoogleUserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GoogleUserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGoogleUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GoogleUser model
+   */
+  readonly fields: GoogleUserFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GoogleUser.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GoogleUserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GoogleUser model
+   */
+  interface GoogleUserFieldRefs {
+    readonly id: FieldRef<"GoogleUser", 'String'>
+    readonly name: FieldRef<"GoogleUser", 'String'>
+    readonly email: FieldRef<"GoogleUser", 'String'>
+    readonly image: FieldRef<"GoogleUser", 'String'>
+    readonly role: FieldRef<"GoogleUser", 'UserRole'>
+    readonly createdAt: FieldRef<"GoogleUser", 'DateTime'>
+    readonly updatedAt: FieldRef<"GoogleUser", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GoogleUser findUnique
+   */
+  export type GoogleUserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleUser
+     */
+    select?: GoogleUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleUser
+     */
+    omit?: GoogleUserOmit<ExtArgs> | null
+    /**
+     * Filter, which GoogleUser to fetch.
+     */
+    where: GoogleUserWhereUniqueInput
+  }
+
+  /**
+   * GoogleUser findUniqueOrThrow
+   */
+  export type GoogleUserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleUser
+     */
+    select?: GoogleUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleUser
+     */
+    omit?: GoogleUserOmit<ExtArgs> | null
+    /**
+     * Filter, which GoogleUser to fetch.
+     */
+    where: GoogleUserWhereUniqueInput
+  }
+
+  /**
+   * GoogleUser findFirst
+   */
+  export type GoogleUserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleUser
+     */
+    select?: GoogleUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleUser
+     */
+    omit?: GoogleUserOmit<ExtArgs> | null
+    /**
+     * Filter, which GoogleUser to fetch.
+     */
+    where?: GoogleUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GoogleUsers to fetch.
+     */
+    orderBy?: GoogleUserOrderByWithRelationInput | GoogleUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GoogleUsers.
+     */
+    cursor?: GoogleUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GoogleUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GoogleUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GoogleUsers.
+     */
+    distinct?: GoogleUserScalarFieldEnum | GoogleUserScalarFieldEnum[]
+  }
+
+  /**
+   * GoogleUser findFirstOrThrow
+   */
+  export type GoogleUserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleUser
+     */
+    select?: GoogleUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleUser
+     */
+    omit?: GoogleUserOmit<ExtArgs> | null
+    /**
+     * Filter, which GoogleUser to fetch.
+     */
+    where?: GoogleUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GoogleUsers to fetch.
+     */
+    orderBy?: GoogleUserOrderByWithRelationInput | GoogleUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GoogleUsers.
+     */
+    cursor?: GoogleUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GoogleUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GoogleUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GoogleUsers.
+     */
+    distinct?: GoogleUserScalarFieldEnum | GoogleUserScalarFieldEnum[]
+  }
+
+  /**
+   * GoogleUser findMany
+   */
+  export type GoogleUserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleUser
+     */
+    select?: GoogleUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleUser
+     */
+    omit?: GoogleUserOmit<ExtArgs> | null
+    /**
+     * Filter, which GoogleUsers to fetch.
+     */
+    where?: GoogleUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GoogleUsers to fetch.
+     */
+    orderBy?: GoogleUserOrderByWithRelationInput | GoogleUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GoogleUsers.
+     */
+    cursor?: GoogleUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GoogleUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GoogleUsers.
+     */
+    skip?: number
+    distinct?: GoogleUserScalarFieldEnum | GoogleUserScalarFieldEnum[]
+  }
+
+  /**
+   * GoogleUser create
+   */
+  export type GoogleUserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleUser
+     */
+    select?: GoogleUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleUser
+     */
+    omit?: GoogleUserOmit<ExtArgs> | null
+    /**
+     * The data needed to create a GoogleUser.
+     */
+    data: XOR<GoogleUserCreateInput, GoogleUserUncheckedCreateInput>
+  }
+
+  /**
+   * GoogleUser createMany
+   */
+  export type GoogleUserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GoogleUsers.
+     */
+    data: GoogleUserCreateManyInput | GoogleUserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GoogleUser createManyAndReturn
+   */
+  export type GoogleUserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleUser
+     */
+    select?: GoogleUserSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleUser
+     */
+    omit?: GoogleUserOmit<ExtArgs> | null
+    /**
+     * The data used to create many GoogleUsers.
+     */
+    data: GoogleUserCreateManyInput | GoogleUserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GoogleUser update
+   */
+  export type GoogleUserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleUser
+     */
+    select?: GoogleUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleUser
+     */
+    omit?: GoogleUserOmit<ExtArgs> | null
+    /**
+     * The data needed to update a GoogleUser.
+     */
+    data: XOR<GoogleUserUpdateInput, GoogleUserUncheckedUpdateInput>
+    /**
+     * Choose, which GoogleUser to update.
+     */
+    where: GoogleUserWhereUniqueInput
+  }
+
+  /**
+   * GoogleUser updateMany
+   */
+  export type GoogleUserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GoogleUsers.
+     */
+    data: XOR<GoogleUserUpdateManyMutationInput, GoogleUserUncheckedUpdateManyInput>
+    /**
+     * Filter which GoogleUsers to update
+     */
+    where?: GoogleUserWhereInput
+    /**
+     * Limit how many GoogleUsers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GoogleUser updateManyAndReturn
+   */
+  export type GoogleUserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleUser
+     */
+    select?: GoogleUserSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleUser
+     */
+    omit?: GoogleUserOmit<ExtArgs> | null
+    /**
+     * The data used to update GoogleUsers.
+     */
+    data: XOR<GoogleUserUpdateManyMutationInput, GoogleUserUncheckedUpdateManyInput>
+    /**
+     * Filter which GoogleUsers to update
+     */
+    where?: GoogleUserWhereInput
+    /**
+     * Limit how many GoogleUsers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GoogleUser upsert
+   */
+  export type GoogleUserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleUser
+     */
+    select?: GoogleUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleUser
+     */
+    omit?: GoogleUserOmit<ExtArgs> | null
+    /**
+     * The filter to search for the GoogleUser to update in case it exists.
+     */
+    where: GoogleUserWhereUniqueInput
+    /**
+     * In case the GoogleUser found by the `where` argument doesn't exist, create a new GoogleUser with this data.
+     */
+    create: XOR<GoogleUserCreateInput, GoogleUserUncheckedCreateInput>
+    /**
+     * In case the GoogleUser was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GoogleUserUpdateInput, GoogleUserUncheckedUpdateInput>
+  }
+
+  /**
+   * GoogleUser delete
+   */
+  export type GoogleUserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleUser
+     */
+    select?: GoogleUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleUser
+     */
+    omit?: GoogleUserOmit<ExtArgs> | null
+    /**
+     * Filter which GoogleUser to delete.
+     */
+    where: GoogleUserWhereUniqueInput
+  }
+
+  /**
+   * GoogleUser deleteMany
+   */
+  export type GoogleUserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GoogleUsers to delete
+     */
+    where?: GoogleUserWhereInput
+    /**
+     * Limit how many GoogleUsers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GoogleUser without action
+   */
+  export type GoogleUserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoogleUser
+     */
+    select?: GoogleUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoogleUser
+     */
+    omit?: GoogleUserOmit<ExtArgs> | null
   }
 
 
@@ -9726,6 +10838,19 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const GoogleUserScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    image: 'image',
+    role: 'role',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GoogleUserScalarFieldEnum = (typeof GoogleUserScalarFieldEnum)[keyof typeof GoogleUserScalarFieldEnum]
+
+
   export const ProblemScalarFieldEnum: {
     id: 'id',
     title: 'title',
@@ -10050,6 +11175,68 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type GoogleUserWhereInput = {
+    AND?: GoogleUserWhereInput | GoogleUserWhereInput[]
+    OR?: GoogleUserWhereInput[]
+    NOT?: GoogleUserWhereInput | GoogleUserWhereInput[]
+    id?: StringFilter<"GoogleUser"> | string
+    name?: StringNullableFilter<"GoogleUser"> | string | null
+    email?: StringFilter<"GoogleUser"> | string
+    image?: StringNullableFilter<"GoogleUser"> | string | null
+    role?: EnumUserRoleFilter<"GoogleUser"> | $Enums.UserRole
+    createdAt?: DateTimeFilter<"GoogleUser"> | Date | string
+    updatedAt?: DateTimeFilter<"GoogleUser"> | Date | string
+  }
+
+  export type GoogleUserOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrderInput | SortOrder
+    email?: SortOrder
+    image?: SortOrderInput | SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GoogleUserWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    email?: string
+    AND?: GoogleUserWhereInput | GoogleUserWhereInput[]
+    OR?: GoogleUserWhereInput[]
+    NOT?: GoogleUserWhereInput | GoogleUserWhereInput[]
+    name?: StringNullableFilter<"GoogleUser"> | string | null
+    image?: StringNullableFilter<"GoogleUser"> | string | null
+    role?: EnumUserRoleFilter<"GoogleUser"> | $Enums.UserRole
+    createdAt?: DateTimeFilter<"GoogleUser"> | Date | string
+    updatedAt?: DateTimeFilter<"GoogleUser"> | Date | string
+  }, "id" | "email">
+
+  export type GoogleUserOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrderInput | SortOrder
+    email?: SortOrder
+    image?: SortOrderInput | SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GoogleUserCountOrderByAggregateInput
+    _max?: GoogleUserMaxOrderByAggregateInput
+    _min?: GoogleUserMinOrderByAggregateInput
+  }
+
+  export type GoogleUserScalarWhereWithAggregatesInput = {
+    AND?: GoogleUserScalarWhereWithAggregatesInput | GoogleUserScalarWhereWithAggregatesInput[]
+    OR?: GoogleUserScalarWhereWithAggregatesInput[]
+    NOT?: GoogleUserScalarWhereWithAggregatesInput | GoogleUserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GoogleUser"> | string
+    name?: StringNullableWithAggregatesFilter<"GoogleUser"> | string | null
+    email?: StringWithAggregatesFilter<"GoogleUser"> | string
+    image?: StringNullableWithAggregatesFilter<"GoogleUser"> | string | null
+    role?: EnumUserRoleWithAggregatesFilter<"GoogleUser"> | $Enums.UserRole
+    createdAt?: DateTimeWithAggregatesFilter<"GoogleUser"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GoogleUser"> | Date | string
   }
 
   export type ProblemWhereInput = {
@@ -10639,6 +11826,76 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GoogleUserCreateInput = {
+    id?: string
+    name?: string | null
+    email: string
+    image?: string | null
+    role?: $Enums.UserRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GoogleUserUncheckedCreateInput = {
+    id?: string
+    name?: string | null
+    email: string
+    image?: string | null
+    role?: $Enums.UserRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GoogleUserUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GoogleUserUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GoogleUserCreateManyInput = {
+    id?: string
+    name?: string | null
+    email: string
+    image?: string | null
+    role?: $Enums.UserRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GoogleUserUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GoogleUserUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11370,6 +12627,36 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type GoogleUserCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    image?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GoogleUserMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    image?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GoogleUserMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    image?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumDifficultyFilter<$PrismaModel = never> = {

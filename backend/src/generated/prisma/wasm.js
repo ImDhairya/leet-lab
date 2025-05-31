@@ -131,6 +131,16 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.GoogleUserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  image: 'image',
+  role: 'role',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ProblemScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -244,6 +254,7 @@ exports.Difficulty = exports.$Enums.Difficulty = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  GoogleUser: 'GoogleUser',
   Problem: 'Problem',
   Submission: 'Submission',
   TestCaseResult: 'TestCaseResult',
