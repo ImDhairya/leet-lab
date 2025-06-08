@@ -2,7 +2,7 @@
 
 _Elevate your coding skills, conquer challenges effortlessly._
 
-![last-commit](https://img.shields.io/github/last-commit/ImDhairya/leet-lab?style=flat&logo=git&logoColor=white&color=0080ff) ![repo-top-language](https://img.shields.io/github/languages/top/ImDhairya/leet-lab?style=flat&color=0080ff) ![repo-language-count](https://img.shields.io/github/languages/count/ImDhairya/leet-lab?style=flat&color=0080ff)
+![repo-top-language](https://img.shields.io/github/languages/top/ImDhairya/leet-lab?style=flat&color=0080ff) ![repo-language-count](https://img.shields.io/github/languages/count/ImDhairya/leet-lab?style=flat&color=0080ff)
 
 _Built with the tools and technologies:_
 
